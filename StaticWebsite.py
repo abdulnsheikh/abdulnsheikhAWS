@@ -24,18 +24,18 @@ account_num = ""
 region=""
 hosted_zone_id=''
 WEB_APP_DOMAIN = ""
-BCUKET_NAME = WEB_APP_DOMAIN.split(".")[0]
+BUCKET_NAME = WEB_APP_DOMAIN.split(".")[0]
 env_US = cdk.Environment(account=account_num, region=region)
 
 
-class AbdulnsheikhStack(Stack):
+class AbdulNSheikhStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs, env=env_US) 
 
         # Create a public bucket (WEB_APP_DOMAIN)
         self.s3_bucket_public = s3.Bucket(
-            self, f"{BCUKET_NAME}PublicBucket",
+            self, f"{BUCKET_NAME}PublicBucket",
             # Bucket name must be globally unique.
             # If not set it's assigned by Cloudformation
             bucket_name="www." + WEB_APP_DOMAIN,
@@ -56,7 +56,7 @@ class AbdulnsheikhStack(Stack):
 
         # Create a private bucket (WEB_APP_DOMAIN)
         self.s3_bucket_private = s3.Bucket(
-            self, f"{BCUKET_NAME}PrivateBucket",
+            self, f"{BUCKET_NAME}PrivateBucket",
             # Bucket name must be globally unique.
             # If not set it's assigned by Cloudformation
             bucket_name=WEB_APP_DOMAIN,
